@@ -10,9 +10,7 @@ export class UsersService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
-  private users: User[] = [];
-
-  insertUser(login: string, password: string) {
+  createUser(login: string, password: string) {
     const newUser = new User(login, password, 'user');
     this.userRepository.save(newUser);
     return newUser;
@@ -22,16 +20,8 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  getUser(id: string) {
+  getUser(id: string): Promise<User> {
     return this.userRepository.findOne({ where: { id: id } });
-  }
-
-  updateUser2(id: string, login: string, password: string) {
-    const [targetUser, index] = this.getUserById(id);
-    const nup = { ...targetUser, login, password };
-    const newUser = new User(nup.login, nup.password, nup.role);
-    this.users[index] = newUser;
-    return newUser;
   }
 
   async updateUser(id: string, login: string, password: string) {
@@ -42,12 +32,7 @@ export class UsersService {
     return user;
   }
 
-  async deleteUser(id: string) {
+  async deleteUser(id: string): Promise<void> {
     await this.userRepository.delete(id);
-  }
-
-  private getUserById(id: string): [User, number] {
-    const index = this.users.findIndex((u) => u.id == id);
-    return [this.users[index], index];
   }
 }

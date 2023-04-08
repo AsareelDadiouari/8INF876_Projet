@@ -14,8 +14,8 @@ export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
   @Post()
-  insertUser(@Body('login') login: string, @Body('password') password: string) {
-    const userId = this.userService.insertUser(login, password);
+  createUser(@Body('login') login: string, @Body('password') password: string) {
+    const userId = this.userService.createUser(login, password);
     return {
       id: userId,
     };
