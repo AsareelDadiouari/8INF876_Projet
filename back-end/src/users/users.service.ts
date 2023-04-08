@@ -1,37 +1,49 @@
 import { Injectable } from '@nestjs/common';
 import { User } from './users.model';
 import { v4 as uuidv4 } from 'uuid';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {}
+
   private users: User[] = [];
 
   insertUser(login: string, password: string) {
-    const id = uuidv4();
-    const newUser = new User(id, login, password, 'user');
-    this.users.push(newUser);
-    return id;
+    const newUser = new User(login, password, 'user');
+    this.userRepository.save(newUser);
+    return newUser;
   }
 
-  getUsers() {
-    return [...this.users];
+  getUsers(): Promise<User[]> {
+    return this.userRepository.find();
   }
 
   getUser(id: string) {
-    return this.getUserById(id)[0];
+    return this.userRepository.findOne({ where: { id: id } });
   }
 
-  updateUser(id: string, login: string, password: string) {
+  updateUser2(id: string, login: string, password: string) {
     const [targetUser, index] = this.getUserById(id);
     const nup = { ...targetUser, login, password };
-    const newUser = new User(id, nup.login, nup.password, nup.role);
+    const newUser = new User(nup.login, nup.password, nup.role);
     this.users[index] = newUser;
     return newUser;
   }
 
-  deleteUser(id: string) {
-    const [_, index] = this.getUserById(id);
-    this.users.splice(index, 1);
+  async updateUser(id: string, login: string, password: string) {
+    const user = await this.userRepository.findOne({ where: { id: id } });
+    user.login = login;
+    user.password = password;
+    await this.userRepository.update(id, user);
+    return user;
+  }
+
+  async deleteUser(id: string) {
+    await this.userRepository.delete(id);
   }
 
   private getUserById(id: string): [User, number] {
