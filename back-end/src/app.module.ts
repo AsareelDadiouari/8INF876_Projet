@@ -4,10 +4,12 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import entities from './index';
+import { TicketsModule } from './tickets/tickets.module';
 
 @Module({
   imports: [
     UsersModule,
+    TicketsModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',

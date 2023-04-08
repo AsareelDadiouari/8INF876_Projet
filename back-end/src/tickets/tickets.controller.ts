@@ -14,14 +14,12 @@ export class TicketsController {
   constructor(private readonly ticketService: TicketsService) {}
 
   @Post()
-  insertTickets(
-    @Body('name') name: string,
+  createTicket(
+    @Body('title') title: string,
     @Body('description') description: string,
   ) {
-    const ticketId = this.ticketService.insertTicket(name, description);
-    return {
-      id: ticketId,
-    };
+    const ticket = this.ticketService.createTicket(title, description);
+    return ticket;
   }
 
   @Get()
@@ -30,21 +28,22 @@ export class TicketsController {
   }
 
   @Get(':ticketId')
-  getTicket(@Param('ticketId') ticketId: string) {
+  getTicket(@Param('ticketId') ticketId: number) {
     return this.ticketService.getTicket(ticketId);
   }
 
   @Put(':ticketId')
   updateUser(
-    @Param('ticketId') ticketId: string,
-    @Body('name') name: string,
+    @Param('ticketId') ticketId: number,
+    @Body('title') title: string,
     @Body('description') description: string,
+    @Body('state') state: string,
   ) {
-    return this.ticketService.updateTicket(ticketId, name, description);
+    return this.ticketService.updateTicket(ticketId, title, description, state);
   }
 
   @Delete(':ticketId')
-  deleteUser(@Param('ticketId') ticketId: string) {
+  deleteUser(@Param('ticketId') ticketId: number) {
     this.ticketService.deleteTicket(ticketId);
   }
 }

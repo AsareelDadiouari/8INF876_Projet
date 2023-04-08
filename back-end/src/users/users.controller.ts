@@ -15,10 +15,8 @@ export class UsersController {
 
   @Post()
   createUser(@Body('login') login: string, @Body('password') password: string) {
-    const userId = this.userService.createUser(login, password);
-    return {
-      id: userId,
-    };
+    const user = this.userService.createUser(login, password);
+    return user;
   }
 
   @Get()

@@ -1,41 +1,44 @@
 import { Injectable } from '@nestjs/common';
 import { Ticket } from './tickets.model';
-import { v4 as uuidv4 } from 'uuid';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TicketsService {
-  private tickets: Ticket[] = [];
+  constructor(
+    @InjectRepository(Ticket)
+    private readonly ticketRepository: Repository<Ticket>,
+  ) {}
 
-  insertTicket(name: string, description: string) {
-    const id = uuidv4();
-    const newTicket = new Ticket(id, name, description, 'user');
-    this.tickets.push(newTicket);
-    return id;
-  }
-
-  getTickets() {
-    return [...this.tickets];
-  }
-
-  getTicket(id: string) {
-    return this.getTicketById(id)[0];
-  }
-
-  updateTicket(id: string, login: string, password: string) {
-    const [targetTicket, index] = this.getTicketById(id);
-    const nup = { ...targetTicket, login, password };
-    const newTicket = new Ticket(id, nup.login, nup.password, nup.state);
-    this.tickets[index] = newTicket;
+  createTicket(name: string, description: string) {
+    const newTicket = new Ticket(name, description, 'pending');
+    this.ticketRepository.save(newTicket);
     return newTicket;
   }
 
-  deleteTicket(id: string) {
-    const [_, index] = this.getTicketById(id);
-    this.tickets.splice(index, 1);
+  getTickets(): Promise<Ticket[]> {
+    return this.ticketRepository.find();
   }
 
-  private getTicketById(id: string): [Ticket, number] {
-    const index = this.tickets.findIndex((t) => t.id == id);
-    return [this.tickets[index], index];
+  getTicket(id: number): Promise<Ticket> {
+    return this.ticketRepository.findOne({ where: { id: id } });
+  }
+
+  async updateTicket(
+    id: number,
+    title: string,
+    description: string,
+    state: string,
+  ) {
+    const ticket = await this.ticketRepository.findOne({ where: { id: id } });
+    ticket.title = title;
+    ticket.description = description;
+    ticket.state = state;
+    await this.ticketRepository.update(id, ticket);
+    return ticket;
+  }
+
+  async deleteTicket(id: number): Promise<void> {
+    await this.ticketRepository.delete(id);
   }
 }
