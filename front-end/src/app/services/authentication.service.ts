@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
+import {environmentProd} from "../../environments/environment.prod";
 import {User} from "../models/user";
 import {map, Observable, tap} from "rxjs";
 
@@ -8,7 +8,7 @@ import {map, Observable, tap} from "rxjs";
   providedIn: 'root'
 })
 export class AuthenticationService {
-  url = environment.backend_url + "users";
+  url = environmentProd.backend_url + "users";
 
   constructor(private http: HttpClient) { }
 
@@ -27,7 +27,7 @@ export class AuthenticationService {
       password : credentials.password
     }
 
-    return this.http.post<User>(this.url , credentialsAlt).pipe(
+    return this.http.post<User>(this.url, credentialsAlt).pipe(
       map((response: any) => response.map((value: any) => {
         return {
           id : value.id,

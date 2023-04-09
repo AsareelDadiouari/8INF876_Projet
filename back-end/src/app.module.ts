@@ -5,6 +5,9 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import entities from './index';
 import { TicketsModule } from './tickets/tickets.module';
+import { ConfigModule } from '@nestjs/config';
+import * as process from 'process';
+ConfigModule.forRoot();
 
 @Module({
   imports: [
@@ -12,11 +15,11 @@ import { TicketsModule } from './tickets/tickets.module';
     TicketsModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: '8inf876-projet',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      username: process.env.MYSQL_USER,
+      password: process.env.MYSQLDB_ROOT_PASSWORD,
+      database: process.env.MYSQLDB_DATABASE,
       entities,
       synchronize: true,
     }),
