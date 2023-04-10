@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Post,
   Put,
@@ -12,10 +13,12 @@ import { UsersService } from './users.service';
 @Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
+  private readonly logger = new Logger(UsersController.name);
 
   @Post()
-  createUser(@Body('login') login: string, @Body('password') password: string) {
-    const user = this.userService.createUser(login, password);
+  createUser(@Body('login') login: string, @Body('password') password: string, @Body('role') role: string) {
+    const user = this.userService.createUser(login, password, role);
+    this.logger.log(user.login);
     return user;
   }
 

@@ -9,8 +9,8 @@ export class UsersService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
-  createUser(login: string, password: string) {
-    const newUser = new User(login, password, 'user');
+  createUser(login: string, password: string, role: string) {
+    const newUser = new User(login, password, role);
     this.userRepository.save(newUser);
     return newUser;
   }
