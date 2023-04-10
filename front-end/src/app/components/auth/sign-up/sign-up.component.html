@@ -24,8 +24,11 @@
       </div>
 
       <div class="form-outline mb-4">
-        <label class="form-label" for="lastname">Role:</label>
-        <input [formControlName]="'role'" class="form-control" id="lastname" type="text"/>
+        <label class="form-label" for="role">Role:</label>
+        <select [formControlName]="'role'" id="role" aria-label="Default select example" class="form-select" [value]="'USER'">
+          <option value="USER">USER</option>
+          <option value="ADMIN">ADMIN</option>
+        </select>
       </div>
 
     </form>

@@ -6,7 +6,7 @@ services:
     env_file: ./.env
     environment:
       MYSQL_DATABASE: $MYSQL_DATABASE
-      MYSQL_USER: $MYSQL_USER
+      MYSQL_ROOT_USER: $MYSQL_USER
       MYSQL_PASSWORD: $MYSQL_PASSWORD
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
     ports:
@@ -32,8 +32,8 @@ services:
     environment:
       - DB_HOST=db
       - DB_USER=$MYSQL_USER
-      - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
-      - DB_NAME=$MYSQLDB_DATABASE
+      - DB_PASSWORD=$MYSQL_PASSWORD
+      - DB_NAME=$MYSQL_DATABASE
       - DB_PORT=$DB_PORT
 
   frontend:
@@ -44,9 +44,9 @@ services:
         context: ./front-end
         dockerfile: Dockerfile
       ports:
-        - '4200:4200'
+        - '8888:81'
       volumes:
-        - my-db
+        - './Dockerfile:/usr/src/app'
 
 volumes:
   my-db:

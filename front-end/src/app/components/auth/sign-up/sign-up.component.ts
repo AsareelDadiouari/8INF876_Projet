@@ -1,16 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {User} from "../../../models/user";
 import {AuthenticationService} from "../../../services/authentication.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent implements OnInit{
+export class SignUpComponent implements OnInit, OnDestroy{
   registerForm!: FormGroup;
+  authSub: Subscription = new Subscription();
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private authService: AuthenticationService) {
@@ -22,6 +24,8 @@ export class SignUpComponent implements OnInit{
       password: new FormControl("", [Validators.required]),
       role: new FormControl("", [Validators.required]),
     });
+
+    this.registerForm.controls['role'].setValue("USER", {onlySelf: true});
   }
 
   onSubmit($event: MouseEvent) {
@@ -31,12 +35,12 @@ export class SignUpComponent implements OnInit{
       role: this.registerForm.get('role')?.value,
     } as User;
 
-    this.authService.signUp(register).subscribe( {
-      next : response => {
-
-      },
-        error : err => alert("error")
+    this.authSub = this.authService.signUp(register).subscribe( response => {
     });
+  }
+
+  ngOnDestroy(): void {
+    this.authSub.unsubscribe();
   }
 
   toLogin($event: MouseEvent) {

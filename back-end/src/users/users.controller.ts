@@ -16,9 +16,8 @@ export class UsersController {
   private readonly logger = new Logger(UsersController.name);
 
   @Post()
-  createUser(@Body('login') login: string, @Body('password') password: string, @Body('role') role: string) {
-    const user = this.userService.createUser(login, password, role);
-    this.logger.log(user.login);
+  async createUser(@Body('login') login: string, @Body('password') password: string, @Body('role') role: string) {
+    const user = await this.userService.createUser(login, password, role);
     return user;
   }
 
