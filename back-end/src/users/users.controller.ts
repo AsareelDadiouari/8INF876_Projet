@@ -3,22 +3,42 @@ import {
   Controller,
   Delete,
   Get,
-  Logger,
   Param,
   Post,
   Put,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { comparePassword } from '../utils/bcrypt';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
-  private readonly logger = new Logger(UsersController.name);
 
   @Post()
-  async createUser(@Body('login') login: string, @Body('password') password: string, @Body('role') role: string) {
-    const user = await this.userService.createUser(login, password, role);
-    return user;
+  async createUser(
+    @Body('username') username: string,
+    @Body('password') password: string,
+    @Body('role') role: string,
+  ) {
+    return await this.userService.createUser(username, password, role);
+  }
+
+  @Post('login')
+  async validateUser(
+    @Body('username') username: string,
+    @Body('password') password: string,
+  ) {
+    const userDB = await this.userService.findUserByUsername(username);
+    if (userDB) {
+      const matched = comparePassword(password, userDB.password);
+      if (matched) {
+        console.log('User validation Success ! ');
+        return userDB;
+      } else {
+        console.log('Password do not match');
+        return null;
+      }
+    }
   }
 
   @Get()

@@ -15,7 +15,7 @@ export class AuthenticationService {
   }
 
   public signIn(credentials: User): Observable<unknown>{
-    return this.http.post(this.url + "login", credentials).pipe(
+    return this.http.post(this.url + "/login", credentials).pipe(
       tap((response) => {
         console.log("Connected")
         localStorage.setItem("user", JSON.stringify(response));
@@ -24,9 +24,9 @@ export class AuthenticationService {
   }
 
   public signUp(credentials: User): Observable<User>{
-    const credentialsAlt : {id?: string, login: string, password:string, role: string} = {
+    const credentialsAlt : {id?: string, username: string, password:string, role: string} = {
       role: credentials.role.toString(),
-      login: credentials.username,
+      username: credentials.username,
       password : credentials.password,
     }
 
@@ -36,7 +36,7 @@ export class AuthenticationService {
         return {
           id : response.id,
           role: response.role,
-          username: response.login,
+          username: response.username,
           password: response.password
         } as User
       }),

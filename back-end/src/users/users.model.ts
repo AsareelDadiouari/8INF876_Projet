@@ -5,11 +5,11 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
   @Column({
-    name: 'login',
+    name: 'username',
     nullable: false,
     default: '',
   })
-  login: string;
+  username: string;
   @Column({
     name: 'password',
     nullable: false,
@@ -23,8 +23,8 @@ export class User {
   })
   role: string;
 
-  constructor(login: string, password: string, role: string) {
-    this.login = login;
+  constructor(username: string, password: string, role: string) {
+    this.username = username;
     this.password = password;
     this.role = role;
   }

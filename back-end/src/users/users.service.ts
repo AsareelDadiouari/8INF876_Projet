@@ -1,18 +1,18 @@
-import {Injectable, Logger} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { User } from './users.model';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { encodePassword } from '../utils/bcrypt';
 
 @Injectable()
 export class UsersService {
-  private readonly logger = new Logger(UsersService.name);
-
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
- async createUser(login: string, password: string, role: string) {
-    const newUser = new User(login, password, role);
+  async createUser(username: string, password: string, role: string) {
+    const encodedPassword = encodePassword(password);
+    const newUser = new User(username, encodedPassword, role);
     return await this.userRepository.save(newUser);
   }
 
@@ -24,9 +24,13 @@ export class UsersService {
     return this.userRepository.findOne({ where: { id: id } });
   }
 
-  async updateUser(id: string, login: string, password: string) {
+  findUserByUsername(username: string): Promise<User> {
+    return this.userRepository.findOne({ where: { username: username } });
+  }
+
+  async updateUser(id: string, username: string, password: string) {
     const user = await this.userRepository.findOne({ where: { id: id } });
-    user.login = login;
+    user.username = username;
     user.password = password;
     await this.userRepository.update(id, user);
     return user;
