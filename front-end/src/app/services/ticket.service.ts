@@ -20,7 +20,10 @@ export class TicketService {
             tap((response) => {
                 alert("Ticket created");
             }),
-          catchError(err => throwError(err.message))
+          catchError(err => throwError(() => {
+            alert("Une erreur s'est produite");
+            return err.message;
+          }))
         );
     }
 }

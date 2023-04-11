@@ -28,7 +28,10 @@ export class AuthenticationService {
       tap((response) => {
         alert("Utilisateur creer");
       }),
-      catchError(err => throwError(err.message))
+      catchError(err => throwError(() => {
+        alert("Une erreur s'est produite");
+        return err.message;
+      }))
     );
   }
 }

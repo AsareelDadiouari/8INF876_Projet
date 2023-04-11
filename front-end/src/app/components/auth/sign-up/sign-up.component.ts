@@ -36,6 +36,7 @@ export class SignUpComponent implements OnInit, OnDestroy{
     } as User;
 
     this.authSub = this.authService.signUp(register).subscribe( response => {
+      this.toLogin(undefined);
     });
   }
 
@@ -43,7 +44,7 @@ export class SignUpComponent implements OnInit, OnDestroy{
     this.authSub.unsubscribe();
   }
 
-  toLogin($event: MouseEvent) {
+  toLogin($event?: MouseEvent) {
     this.router.navigate(['auth/sign-in'])
       .then(r => console.log(r))
       .catch(err => console.error(err));
