@@ -24,28 +24,11 @@ export class AuthenticationService {
   }
 
   public signUp(credentials: User): Observable<User>{
-    const credentialsAlt : {id?: string, username: string, password:string, role: string} = {
-      role: credentials.role.toString(),
-      username: credentials.username,
-      password : credentials.password,
-    }
-
-    return this.http.post<User>(this.url, credentialsAlt).pipe(
-      map((response: any) => {
-        console.log(response)
-        return {
-          id : response.id,
-          role: response.role,
-          username: response.username,
-          password: response.password
-        } as User
-      }),
+    return this.http.post<User>(this.url, credentials).pipe(
       tap((response) => {
         alert("Utilisateur creer");
       }),
-      catchError(err => new Observable<User>().pipe(tap(_ => {
-        alert(err.message);
-      })))
+      catchError(err => throwError(err.message))
     );
   }
 }
