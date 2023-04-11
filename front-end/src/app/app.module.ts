@@ -12,12 +12,14 @@ import {AuthGuard} from "./auth.guard";
 import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app.routing.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProfilPageComponent } from './components/profil-page/profil-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
     AddTicketPageComponent,
+    ProfilPageComponent,
   ],
   imports: [
     BrowserModule,

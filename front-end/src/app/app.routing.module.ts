@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { AddTicketPageComponent } from './components/add-tickets/add-tickets.component';
+import { ProfilPageComponent } from './components/profil-page/profil-page.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'add-ticket',
     component: AddTicketPageComponent,
+  },
+  {
+    path: 'profil',
+    component: ProfilPageComponent,
   },
   {
     path: '**',
