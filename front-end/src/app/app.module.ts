@@ -6,17 +6,18 @@ import { SignInComponent } from './components/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import {RouterModule, RouterOutlet} from "@angular/router";
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
-import { AddTicketPageComponent } from './components/tickets/add-tickets.component';
+import { AddTicketPageComponent } from './components/add-tickets/add-tickets.component';
 import {AuthModule} from "./components/auth/auth.module";
 import {AuthGuard} from "./auth.guard";
 import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app.routing.module";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
-    AddTicketPageComponent
+    AddTicketPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +26,8 @@ import {AppRoutingModule} from "./app.routing.module";
     HttpClientModule,
     AppRoutingModule,
     AuthModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

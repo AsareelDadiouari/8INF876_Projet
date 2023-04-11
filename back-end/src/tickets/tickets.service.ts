@@ -10,8 +10,8 @@ export class TicketsService {
     private readonly ticketRepository: Repository<Ticket>,
   ) {}
 
-  createTicket(name: string, description: string) {
-    const newTicket = new Ticket(name, description, 'pending');
+  createTicket(idUser: string, name: string, description: string) {
+    const newTicket = new Ticket(idUser, name, description, 'pending');
     this.ticketRepository.save(newTicket);
     return newTicket;
   }

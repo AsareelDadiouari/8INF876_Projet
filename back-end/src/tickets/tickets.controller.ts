@@ -15,10 +15,11 @@ export class TicketsController {
 
   @Post()
   createTicket(
+    @Body('idUser') idUser: string,
     @Body('title') title: string,
     @Body('description') description: string,
   ) {
-    const ticket = this.ticketService.createTicket(title, description);
+    const ticket = this.ticketService.createTicket(idUser, title, description);
     return ticket;
   }
 

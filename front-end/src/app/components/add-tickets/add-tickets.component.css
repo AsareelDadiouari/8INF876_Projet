@@ -1,0 +1,18 @@
+/* Sélectionnez le formulaire que vous souhaitez personnaliser */
+form {
+    /* Réglez la taille de l'image pour qu'elle remplisse l'arrière-plan */
+    background-size: cover;
+
+    /* Définir la position de l'image de fond */
+    background-position: center;
+
+    /* Ajouter une couleur d'arrière-plan de secours si l'image ne se charge pas */
+    background-color: #f2f2f2;
+
+    /* Ajouter une ombre à l'arrière-plan pour la dimensionner */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+    /* Ajouter des bords arrondis */
+    border-radius: 10px;
+    overflow: hidden;
+}

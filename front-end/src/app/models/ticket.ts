@@ -1,5 +1,3 @@
-import {User} from "./user";
-
 enum Status {
   PENDING,
   RESOLVED,
@@ -7,8 +5,8 @@ enum Status {
 }
 
 export type Ticket = {
-  id: string
-  status: Status
-  number: number
-  holder: User
+  idUser: string
+  title: string
+  description: string
+  state: Status
 }
