@@ -15,7 +15,7 @@ export class TicketsComponent {
     @Input()
     ticketDescription: string = "Ceci est la superbe description de mon ticket";
     @Input()
-    ticketState: string = "resolved";
+    ticketState: string = "cancelled";
     @Input()
     ticketUserId: string = "1a960343-d0ec-4f47-a12c-9046f8bde423";
     @Input()
@@ -30,5 +30,17 @@ export class TicketsComponent {
         this.ticketSub = this.userService.getUserById(this.ticketUserId).subscribe((response) => {
             console.log("response", response)
         });
+    }
+
+    resolved(): void {
+        this.ticketState = "resolved"
+    }
+
+    pending(): void {
+        this.ticketState = "pending"
+    }
+
+    cancelled(): void {
+        this.ticketState = "cancelled"
     }
 }
