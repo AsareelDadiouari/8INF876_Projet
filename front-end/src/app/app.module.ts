@@ -13,6 +13,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app.routing.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfilPageComponent } from './components/profil-page/profil-page.component';
+import { TicketsComponent } from './components/tickets/tickets.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ProfilPageComponent } from './components/profil-page/profil-page.compon
     LandingPageComponent,
     AddTicketPageComponent,
     ProfilPageComponent,
+    TicketsComponent,
   ],
   imports: [
     BrowserModule,

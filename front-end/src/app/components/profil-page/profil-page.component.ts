@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { ProfilPageService } from 'src/app/services/profil-page.service';
+import { UserService } from '../../services/users.service';
 
 @Component({
   selector: 'profil-page',
@@ -21,7 +21,7 @@ export class ProfilPageComponent {
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
-    private profilPageService: ProfilPageService) {
+    private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -108,7 +108,7 @@ export class ProfilPageComponent {
   }
 
   updateUser(register: {}): void {
-    this.profilPageSub = this.profilPageService.updateUser(register, this.getIdUser()).subscribe(response => {
+    this.profilPageSub = this.userService.updateUser(register, this.getIdUser()).subscribe(() => {
       this.refresh()
     });
   }

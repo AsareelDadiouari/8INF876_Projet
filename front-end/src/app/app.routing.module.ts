@@ -4,6 +4,7 @@ import { AuthGuard } from './auth.guard';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { AddTicketPageComponent } from './components/add-tickets/add-tickets.component';
 import { ProfilPageComponent } from './components/profil-page/profil-page.component';
+import { TicketsComponent } from './components/tickets/tickets.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'profil',
     component: ProfilPageComponent,
+  },
+  {
+    path: 'ticket',
+    component: TicketsComponent,
   },
   {
     path: '**',

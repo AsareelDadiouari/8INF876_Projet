@@ -1,0 +1,22 @@
+<div class="card border-dark">
+    <div>
+        <h5 class="card-header text-bg-secondary border-dark">
+            <div *ngIf="userRole==='admin'">
+                Ticket #{{ticketId}} par {{username}}
+                <span class="badge text-bg-danger" *ngIf="ticketState==='cancelled'">Annulé</span>
+                <span class="badge text-bg-warning" *ngIf="ticketState==='pending'">En attente</span>
+                <span class="badge text-bg-success" *ngIf="ticketState==='resolved'">Résolu</span>
+            </div>
+            <div *ngIf="userRole==='user'">
+                Ticket #{{ticketId}}
+                <span class="badge text-bg-danger" *ngIf="ticketState==='cancelled'">Annulé</span>
+                <span class="badge text-bg-warning" *ngIf="ticketState==='pending'">En attente</span>
+                <span class="badge text-bg-success" *ngIf="ticketState==='resolved'">Résolu</span>
+            </div>
+        </h5>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ticketTitle}}</h5>
+        <p class="card-text">{{ticketDescription}}</p>
+    </div>
+</div>

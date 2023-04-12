@@ -33,8 +33,13 @@ export class TicketsController {
     return this.ticketService.getTicket(ticketId);
   }
 
+  @Get('/tickets/:userId')
+  getUserTickets(@Param('userId') userId: string) {
+    return this.ticketService.getUserTickets(userId);
+  }
+
   @Put(':ticketId')
-  updateUser(
+  updateTicket(
     @Param('ticketId') ticketId: number,
     @Body('title') title: string,
     @Body('description') description: string,
@@ -44,7 +49,7 @@ export class TicketsController {
   }
 
   @Delete(':ticketId')
-  deleteUser(@Param('ticketId') ticketId: number) {
+  deleteTicket(@Param('ticketId') ticketId: number) {
     this.ticketService.deleteTicket(ticketId);
   }
 }

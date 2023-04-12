@@ -24,6 +24,10 @@ export class TicketsService {
     return this.ticketRepository.findOne({ where: { id: id } });
   }
 
+  getUserTickets(id: string): Promise<Ticket[]> {
+    return this.ticketRepository.find({ where: { idUser: id } });
+  }
+
   async updateTicket(
     id: number,
     title: string,

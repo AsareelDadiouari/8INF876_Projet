@@ -6,7 +6,7 @@ import { catchError, Observable, tap, throwError } from "rxjs";
 @Injectable({
     providedIn: 'root'
 })
-export class ProfilPageService {
+export class UserService {
     url = environment.backend_url + "users";
 
     constructor(private http: HttpClient) {
@@ -18,6 +18,18 @@ export class ProfilPageService {
         return this.http.put(this.url + "/" + idUser, credentials).pipe(
             tap((response) => {
                 localStorage.setItem("user", JSON.stringify(response));
+            }),
+          catchError(err => throwError(() => {
+            alert("Une erreur s'est produite");
+            return err.message;
+          }))
+        );
+    }
+
+    public getUserById(idUser: string) {
+        return this.http.get(this.url + "/" + idUser).pipe(
+            tap((response) => {
+                return response
             }),
           catchError(err => throwError(() => {
             alert("Une erreur s'est produite");

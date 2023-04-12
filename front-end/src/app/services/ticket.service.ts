@@ -26,4 +26,16 @@ export class TicketService {
           }))
         );
     }
+
+    public getAllTicket(): Observable<Ticket[]> {
+        return this.http.get<Ticket[]>(this.url).pipe(
+            tap((response) => {
+                return response
+            }),
+          catchError(err => throwError(() => {
+            alert("Une erreur s'est produite");
+            return err.message;
+          }))
+        );
+    }
 }
