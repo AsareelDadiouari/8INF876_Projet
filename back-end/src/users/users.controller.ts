@@ -52,12 +52,35 @@ export class UsersController {
   }
 
   @Put(':userId')
-  updateUser(
+  async updateUser(
     @Param('userId') userId: string,
-    @Body('login') login: string,
+    @Body('newUsername') newUsername: string,
+    @Body('newPassword') newPassword: string,
     @Body('password') password: string,
   ) {
-    return this.userService.updateUser(userId, login, password);
+    const userDB = await this.userService.getUser(userId);
+    if (userDB) {
+      const matched = comparePassword(password, userDB.password);
+      if (matched) {
+        if (!newUsername && !newPassword) {
+          console.log('Error');
+        } else if (!newUsername) {
+          return this.userService.updateUser(
+            userId,
+            userDB.username,
+            newPassword,
+          );
+        } else if (!newPassword) {
+          return this.userService.updateUser(userId, newUsername, password);
+        } else {
+          return this.userService.updateUser(userId, newUsername, newPassword);
+        }
+        return userDB;
+      } else {
+        console.log('Password do not match');
+        return userDB;
+      }
+    }
   }
 
   @Delete(':userId')

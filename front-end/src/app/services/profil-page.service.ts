@@ -2,23 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from "../../environments/environment";
 import { catchError, Observable, tap, throwError } from "rxjs";
-import { Ticket } from '../models/ticket';
 
 @Injectable({
     providedIn: 'root'
 })
-export class TicketService {
-    url = environment.backend_url + "tickets";
+export class ProfilPageService {
+    url = environment.backend_url + "users";
 
     constructor(private http: HttpClient) {
         this.http.get(this.url).pipe(tap(response => console.log(response)))
     }
 
 
-    public createTicket(credentials: Ticket): Observable<Ticket> {
-        return this.http.post<Ticket>(this.url, credentials).pipe(
+    public updateUser(credentials: {}, idUser: string) {
+        return this.http.put(this.url + "/" + idUser, credentials).pipe(
             tap((response) => {
-                alert("Ticket created");
+                localStorage.setItem("user", JSON.stringify(response));
             }),
           catchError(err => throwError(() => {
             alert("Une erreur s'est produite");

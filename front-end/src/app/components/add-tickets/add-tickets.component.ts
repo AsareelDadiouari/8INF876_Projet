@@ -27,7 +27,7 @@ export class AddTicketPageComponent implements OnInit {
     });
 
     this.ticketForm.controls['state'].setValue("PENDING", { onlySelf: true });
-    this.ticketForm.controls['idUser'].setValue("TEST", { onlySelf: true });
+    this.ticketForm.controls['idUser'].setValue(this.getIdUser(), { onlySelf: true });
   }
 
   onSubmit($event: MouseEvent) {
@@ -49,6 +49,14 @@ export class AddTicketPageComponent implements OnInit {
       .catch(err => console.error(err));
   }
 
-
+  getIdUser() {
+    const userString = localStorage.getItem("user");
+    if (userString !== null) {
+      const user = JSON.parse(userString);
+      return user.id
+    } else {
+      return "error"
+    }
+  }
 
 }

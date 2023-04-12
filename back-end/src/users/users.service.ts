@@ -29,9 +29,10 @@ export class UsersService {
   }
 
   async updateUser(id: string, username: string, password: string) {
+    const encodedPassword = encodePassword(password);
     const user = await this.userRepository.findOne({ where: { id: id } });
     user.username = username;
-    user.password = password;
+    user.password = encodedPassword;
     await this.userRepository.update(id, user);
     return user;
   }
