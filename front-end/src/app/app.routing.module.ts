@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
-import { AddTicketPageComponent } from './components/add-tickets/add-tickets.component';
-import { ProfilPageComponent } from './components/profil-page/profil-page.component';
-import { TicketsComponent } from './components/tickets/tickets.component';
+import { LandingPageComponent } from './components/pages/landing-page/landing-page.component';
+import { AddTicketPageComponent } from './components/tickets/add-tickets/add-tickets.component';
+import { ProfilPageComponent } from './components/pages/profil-page/profil-page.component';
+import {TicketComponent} from "./components/tickets/ticket/ticket.component";
 
 const routes: Routes = [
   {
@@ -15,7 +15,6 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-
     loadChildren: () => import(`./components/auth/auth.module`)
       .then( module => module.AuthModule)
   },
@@ -29,7 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'ticket',
-    component: TicketsComponent,
+    component: TicketComponent,
   },
   {
     path: '**',

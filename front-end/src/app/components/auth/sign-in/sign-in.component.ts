@@ -30,7 +30,9 @@ export class SignInComponent implements OnInit{
       password: this.loginForm.get('password')?.value,
     } as User;
 
-    this.authService.signIn(login).subscribe( response => {});
+    this.authService.signIn(login).subscribe( async (response) => {
+      await this.router.navigate(['/'])
+    });
   }
 
   toRegister($event: MouseEvent) {

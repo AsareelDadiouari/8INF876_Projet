@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from "../../environments/environment";
-import { catchError, Observable, tap, throwError } from "rxjs";
+import {BehaviorSubject, catchError, Observable, tap, throwError} from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
     url = environment.backend_url + "users";
+    authenticated : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(localStorage.getItem('user') !== null);
 
     constructor(private http: HttpClient) {
         this.http.get(this.url).pipe(tap(response => console.log(response)))
@@ -36,5 +37,15 @@ export class UserService {
             return err.message;
           }))
         );
+    }
+
+    isAuthenticated() {
+      console.log( )
+      return this.authenticated;
+    }
+
+    disconnect() {
+      localStorage.removeItem("user");
+      this.authenticated.next(localStorage.getItem('user') !== null)
     }
 }

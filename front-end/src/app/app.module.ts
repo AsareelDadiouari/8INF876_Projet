@@ -2,26 +2,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { SignInComponent } from './components/auth/sign-in/sign-in.component';
-import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import {RouterModule, RouterOutlet} from "@angular/router";
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
-import { AddTicketPageComponent } from './components/add-tickets/add-tickets.component';
 import {AuthModule} from "./components/auth/auth.module";
 import {AuthGuard} from "./auth.guard";
 import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app.routing.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProfilPageComponent } from './components/profil-page/profil-page.component';
-import { TicketsComponent } from './components/tickets/tickets.component';
+import {PagesModule} from "./components/pages/pages.module";
+import {TicketsModule} from "./components/tickets/tickets.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingPageComponent,
-    AddTicketPageComponent,
-    ProfilPageComponent,
-    TicketsComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,8 +22,8 @@ import { TicketsComponent } from './components/tickets/tickets.component';
     HttpClientModule,
     AppRoutingModule,
     AuthModule,
-    FormsModule,
-    ReactiveFormsModule,
+    PagesModule,
+    TicketsModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

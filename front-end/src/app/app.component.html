@@ -1,4 +1,17 @@
 <div class="toolbar" role="banner">
+  <span (click)="redirectTo('/')"  class="logo-PrixBanque">Ticket</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <div class="spacer"></div>
+  <span style="margin-right: 30px" *ngIf="authenticated" >Bonjour {{userInfo?.firstName}}</span>
+  <button style="margin-top: 25px" *ngIf="!authenticated" (click)="redirectTo('/auth/sign-in')" aria-label="Angular on twitter" class="btn btn-info btn-block mb-4"  title="disconnect">
+    Connexion
+  </button>
+  <button style="margin-top: 25px" *ngIf="!authenticated" (click)="redirectTo('/auth/sign-up')" aria-label="Angular on twitter" class="btn btn-info btn-block mb-4"  title="disconnect">
+    Inscription
+  </button>
+  <button style="margin-top: 25px" *ngIf="authenticated" (click)="disconnect()" aria-label="Angular on twitter" class="btn btn-danger btn-block mb-4"  title="disconnect">
+    Log Out
+  </button>
 </div>
 
 <div class="content" role="main">
