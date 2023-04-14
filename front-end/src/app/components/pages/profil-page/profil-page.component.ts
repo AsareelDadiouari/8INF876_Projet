@@ -118,7 +118,7 @@ export class ProfilPageComponent implements OnInit{
   }
 
   toMainPage($event: MouseEvent): void {
-    this.router.navigate(['']) //Il faudrat remplacer par la page principale !
+    this.router.navigate([''])
       .then(r => console.log(r))
       .catch(err => console.error(err));
   }

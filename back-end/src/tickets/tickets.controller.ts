@@ -2,7 +2,8 @@ import {
   Body,
   Controller,
   Delete,
-  Get, Logger,
+  Get,
+  Logger,
   Param,
   Post,
   Put,
@@ -11,7 +12,6 @@ import { TicketsService } from './tickets.service';
 
 @Controller('tickets')
 export class TicketsController {
-
   constructor(private readonly ticketService: TicketsService) {}
 
   @Post()

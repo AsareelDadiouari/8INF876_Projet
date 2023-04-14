@@ -4,6 +4,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {AddTicketPageComponent} from "./add-tickets/add-tickets.component";
 import {TicketComponent} from "./ticket/ticket.component";
 import {AsyncPipe, NgIf} from "@angular/common";
+import { UpdateTicketPageComponent } from "./update-tickets/update-tickets.component";
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import {AsyncPipe, NgIf} from "@angular/common";
   ],
   declarations: [
     AddTicketPageComponent,
+    UpdateTicketPageComponent,
     TicketComponent
   ],
   exports: [AddTicketPageComponent, TicketComponent],

@@ -4,7 +4,7 @@
             <form [formGroup]="profilForm" class="col-auto p-2">
                 <div class="container text-center fs-3 mb-3">Profil</div>
                 <div class="row">
-                    <label for="FormControlUsername" class="fs-4 form-label">Pseudo</label>
+                    <label for="FormControlUsername" class="fs-4 form-label">Nom d'utilisateur</label>
                     <div class="col">
                         <input type="text" class="form-control" id="FormControlUsername" value={{username}} readonly>
                     </div>
@@ -37,12 +37,12 @@
                 <div *ngIf="updatePasswordValue">
                     <div class="row justify-content-center">
                         <div class="col-6 mt-2">
-                            <input [formControlName]="'newPassord'" type="password" class="form-control" id="FormControlNewPassword"
-                                placeholder="Nouveau Mot de passe">
+                            <input [formControlName]="'newPassord'" type="password" class="form-control"
+                                id="FormControlNewPassword" placeholder="Nouveau Mot de passe">
                         </div>
                         <div class="col-6 mt-2">
-                            <input [formControlName]="'passwordForNewPassord'" type="password" class="form-control" id="FormControlActualPassword"
-                                placeholder="Mot de passe">
+                            <input [formControlName]="'passwordForNewPassord'" type="password" class="form-control"
+                                id="FormControlActualPassword" placeholder="Mot de passe">
                         </div>
                     </div>
                 </div>

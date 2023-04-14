@@ -1,25 +1,25 @@
-<div class="toolbar p-2" role="banner">
-  <span (click)="redirectTo('/')"  class="logo-PrixBanque">TicketSystem</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <button  *ngIf="authenticated" style="margin-top: 25px; margin-left: 150px" (click)="redirectTo('/add-ticket')" aria-label="Angular on twitter" class="btn btn-info btn-block mb-4"  title="disconnect">
+<div class="toolbar bg-secondary p-2" role="banner">
+  <span (click)="redirectTo('/')"  class="text-light logo-PrixBanque">TicketSystem</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button  *ngIf="authenticated" style="margin-top: 25px; margin-left: 150px" (click)="redirectTo('/add-ticket')" aria-label="Angular on twitter" class="btn btn-info btn-block mb-4">
     Ajouter un ticket
   </button>
 
   <div class="spacer"></div>
   <div *ngIf="authenticated; else notAuthenticated" >
     <span style="margin-right: 30px"  >Bonjour {{userInfo?.username}}</span>
-    <button style="margin-top: 25px"  (click)="disconnect()" aria-label="Angular on twitter" class="btn btn-danger btn-block mb-4"  title="disconnect">
+    <button style="margin-top: 25px"  (click)="disconnect()" aria-label="Angular on twitter" class="btn btn-danger btn-block mb-4">
       Log Out
     </button>
-    <button style="margin-top: 25px; margin-left: 5px" (click)="redirectTo('/profil')" aria-label="Angular on twitter" class="btn btn-info btn-block mb-4"  title="disconnect">
+    <button style="margin-top: 25px; margin-left: 5px" (click)="redirectTo('/profil')" aria-label="Angular on twitter" class="btn btn-info btn-block mb-4">
       Profile
     </button>
   </div>
 
   <ng-template #notAuthenticated >
-    <button style="margin-top: 25px; margin-right: 25px" (click)="redirectTo('/auth/sign-in')" aria-label="Angular on twitter" class="btn btn-info btn-block mb-4"  title="disconnect">
+    <button style="margin-top: 25px; margin-right: 25px" (click)="redirectTo('/auth/sign-in')" aria-label="Angular on twitter" class="btn btn-info btn-block mb-4">
       Connexion
     </button>
-    <button style="margin-top: 25px" (click)="redirectTo('/auth/sign-up')" aria-label="Angular on twitter" class="btn btn-info btn-block mb-4"  title="disconnect">
+    <button style="margin-top: 25px" (click)="redirectTo('/auth/sign-up')" aria-label="Angular on twitter" class="btn btn-info btn-block mb-4">
       Inscription
     </button>
   </ng-template>

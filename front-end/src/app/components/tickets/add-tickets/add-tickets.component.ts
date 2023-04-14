@@ -39,12 +39,12 @@ export class AddTicketPageComponent implements OnInit {
     } as Ticket;
     console.log(register)
     this.ticketSub = this.ticketService.createTicket(register).subscribe(response => {
-      this.router.navigateByUrl(''); //Il faudrat remplacer par la page principale !
+      this.router.navigateByUrl('');
     });
   }
 
   toMainPage($event: MouseEvent) {
-    this.router.navigate(['']) //Il faudrat remplacer par la page principale !
+    this.router.navigate([''])
       .then(r => console.log(r))
       .catch(err => console.error(err));
   }

@@ -1,16 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
-import {UserService} from 'src/app/services/users.service';
-import {Role, User} from "../../../models/user";
-import {TicketService} from "../../../services/ticket.service";
-import {Ticket} from "../../../models/ticket";
+import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/services/users.service';
+import { Role, User } from "../../../models/user";
+import { TicketService } from "../../../services/ticket.service";
+import { Ticket } from "../../../models/ticket";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ticket',
   templateUrl: './ticket.component.html',
   styleUrls: ['./ticket.component.css']
 })
-export class TicketComponent implements OnInit{
+export class TicketComponent implements OnInit {
   @Input()
   ticketId: number | undefined;
   @Input()
@@ -27,17 +28,23 @@ export class TicketComponent implements OnInit{
   username: string = "CocoBiturbo";
 
   ticketSub: Subscription = new Subscription();
-  constructor(private userService: UserService, private ticketService: TicketService) { };
+  constructor(private userService: UserService, private router: Router, private ticketService: TicketService) { };
 
   ngOnInit(): void {
     this.userService.currentUser.subscribe(user => {
       this.userRole = user?.role || Role.USER;
-      if (user?.role.toString() === "ADMIN"){
+      if (user?.role.toString() === "ADMIN") {
         this.ticketSub = this.userService.getUserById(this.ticketUserId).subscribe((response: User) => {
           this.username = response.username;
         });
       }
     })
+  }
+
+  navigateToUpdateTicket(): void {
+    this.router.navigate(['/update-ticket'], { state: { ticket: this.get() } })
+      .then(r => console.log(r))
+      .catch(err => console.error(err));
   }
 
   resolved(): void {
@@ -61,7 +68,7 @@ export class TicketComponent implements OnInit{
     });
   }
 
-  private get(){
+  private get() {
     return {
       id: this.ticketId,
       title: this.ticketTitle,

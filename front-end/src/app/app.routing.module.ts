@@ -5,6 +5,7 @@ import { LandingPageComponent } from './components/pages/landing-page/landing-pa
 import { AddTicketPageComponent } from './components/tickets/add-tickets/add-tickets.component';
 import { ProfilPageComponent } from './components/pages/profil-page/profil-page.component';
 import {TicketComponent} from "./components/tickets/ticket/ticket.component";
+import { UpdateTicketPageComponent } from './components/tickets/update-tickets/update-tickets.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'add-ticket',
     component: AddTicketPageComponent,
+  },
+  {
+    path: 'update-ticket',
+    component: UpdateTicketPageComponent,
   },
   {
     path: 'profil',
