@@ -1,1 +1,9 @@
-<p>landing-page works!</p>
+<div *ngFor="let ticket of tickets; let i = index">
+  <ticket [ticketId]="i + 1"
+          [ticketUserId]="ticket.idUser"
+          [ticketDescription]="ticket.description"
+          [ticketState]="ticket.state.toString().toLowerCase()"
+          [ticketTitle]="ticket.title"
+          [userRole]="(userService.currentUser.value)?.role?.toString()"
+          />
+</div>

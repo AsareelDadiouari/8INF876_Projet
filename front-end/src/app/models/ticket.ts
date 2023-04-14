@@ -5,6 +5,7 @@ enum Status {
 }
 
 export type Ticket = {
+  id: string | number
   idUser: string
   title: string
   description: string

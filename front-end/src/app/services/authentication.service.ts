@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {environment} from "../../environments/environment";
 import {User} from "../models/user";
 import {catchError, map, Observable, tap, throwError} from "rxjs";
+import {UserService} from "./users.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +11,21 @@ import {catchError, map, Observable, tap, throwError} from "rxjs";
 export class AuthenticationService {
   url = environment.backend_url + "users";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService) {
     this.http.get(this.url).pipe(tap(response => console.log(response)))
   }
 
   public signIn(credentials: User): Observable<unknown>{
     return this.http.post(this.url + "/login", credentials).pipe(
       tap((response) => {
-        console.log("Connected")
-        localStorage.setItem("user", JSON.stringify(response));
+        if (response === null){
+          alert("Une erreur s'est produite");
+          throw new Error("Le serveur renvoie Null durant l'authentification");
+        } else {
+          alert("Connected")
+          localStorage.setItem("user", JSON.stringify(response));
+          this.userService.authenticated.next(localStorage.getItem('user') !== null);
+        }
       })
     );
   }

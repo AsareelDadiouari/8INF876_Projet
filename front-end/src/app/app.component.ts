@@ -10,20 +10,23 @@ import {Router} from "@angular/router";
 })
 export class AppComponent implements OnInit{
   title = 'front-end';
-  userInfo: User | null =  JSON.parse(localStorage.getItem('user') || '{}');
   authenticated = false;
+  userInfo: User | undefined;
 
   constructor(public userService:UserService, private router: Router) {
   }
 
   ngOnInit() {
-    this.userService.isAuthenticated().subscribe(value => this.authenticated = value);
+    this.userService.isAuthenticated().subscribe(value => {
+      this.authenticated = value;
+    });
+    this.userService.currentUser.subscribe(user => {
+      this.userInfo = user;
+    });
   }
 
-  redirectTo(param: string) {
-    this.router.navigate([param])
-      .then(r => console.log(r))
-      .catch(err => console.error(err));
+  async redirectTo(param: string) {
+    await this.router.navigate([param]);
   }
 
   disconnect() {

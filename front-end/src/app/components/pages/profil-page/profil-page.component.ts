@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
@@ -9,7 +9,7 @@ import { UserService } from '../../../services/users.service';
   templateUrl: './profil-page.component.html',
   styleUrls: ['./profil-page.component.css']
 })
-export class ProfilPageComponent {
+export class ProfilPageComponent implements OnInit{
   @Input() username: string = this.getUsername();
   @Input() password: string = this.getPassword();
 
