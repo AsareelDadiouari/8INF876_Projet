@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Delete,
-  Get,
+  Get, Logger,
   Param,
   Post,
   Put,
@@ -11,6 +11,7 @@ import { TicketsService } from './tickets.service';
 
 @Controller('tickets')
 export class TicketsController {
+
   constructor(private readonly ticketService: TicketsService) {}
 
   @Post()
@@ -40,7 +41,7 @@ export class TicketsController {
 
   @Put(':ticketId')
   updateTicket(
-    @Param('id') ticketId: number,
+    @Param('ticketId') ticketId: number,
     @Body('title') title: string,
     @Body('description') description: string,
     @Body('state') state: string,

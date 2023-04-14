@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable, Logger} from '@nestjs/common';
 import { Ticket } from './tickets.model';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -38,7 +38,7 @@ export class TicketsService {
     ticket.title = title;
     ticket.description = description;
     ticket.state = state;
-    await this.ticketRepository.update(id, ticket);
+    await this.ticketRepository.save(ticket);
     return ticket;
   }
 
