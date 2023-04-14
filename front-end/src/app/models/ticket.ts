@@ -9,5 +9,5 @@ export type Ticket = {
   idUser: string
   title: string
   description: string
-  state: Status
+  state: Status | string
 }

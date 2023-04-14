@@ -1,5 +1,5 @@
 <div *ngFor="let ticket of tickets; let i = index">
-  <ticket [ticketId]="i + 1"
+  <ticket [ticketId]="ticket.id"
           [ticketUserId]="ticket.idUser"
           [ticketDescription]="ticket.description"
           [ticketState]="ticket.state.toString().toLowerCase()"

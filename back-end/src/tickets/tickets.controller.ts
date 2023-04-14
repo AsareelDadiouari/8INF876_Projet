@@ -40,7 +40,7 @@ export class TicketsController {
 
   @Put(':ticketId')
   updateTicket(
-    @Param('ticketId') ticketId: number,
+    @Param('id') ticketId: number,
     @Body('title') title: string,
     @Body('description') description: string,
     @Body('state') state: string,

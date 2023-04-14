@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from "../../environments/environment";
-import { catchError, Observable, tap, throwError } from "rxjs";
+import {BehaviorSubject, catchError, Observable, tap, throwError} from "rxjs";
 import { Ticket } from '../models/ticket';
 
 @Injectable({
@@ -9,9 +9,12 @@ import { Ticket } from '../models/ticket';
 })
 export class TicketService {
     url = environment.backend_url + "tickets";
+    public tickets$ : BehaviorSubject<Ticket[]> = new BehaviorSubject<Ticket[]>([]);
 
     constructor(private http: HttpClient) {
-        this.http.get(this.url).pipe(tap(response => console.log(response)))
+      this.getAllTicket().subscribe(tickets => {
+        this.tickets$.next(tickets);
+      })
     }
 
 
@@ -30,12 +33,19 @@ export class TicketService {
     public getAllTicket(): Observable<Ticket[]> {
         return this.http.get<Ticket[]>(this.url).pipe(
             tap((response) => {
-                return response
             }),
           catchError(err => throwError(() => {
             alert("Une erreur s'est produite");
             return err.message;
           }))
         );
+    }
+
+    updateTicket(ticket: Ticket): Observable<Ticket>{
+      return this.http.put<Ticket>(this.url + '/' + ticket.id, ticket).pipe(
+        tap(response => {
+          this.tickets$.next(this.tickets$.value.map(ticket => this.tickets$.value.find(o => o.id === ticket.id) || ticket))
+        })
+      );
     }
 }

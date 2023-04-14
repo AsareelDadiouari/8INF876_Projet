@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {UserService} from 'src/app/services/users.service';
 import {Role, User} from "../../../models/user";
+import {TicketService} from "../../../services/ticket.service";
+import {Ticket} from "../../../models/ticket";
 
 @Component({
   selector: 'ticket',
@@ -25,7 +27,7 @@ export class TicketComponent implements OnInit{
   username: string = "CocoBiturbo";
 
   ticketSub: Subscription = new Subscription();
-  constructor(private userService: UserService) { };
+  constructor(private userService: UserService, private ticketService: TicketService) { };
 
   ngOnInit(): void {
     this.userService.currentUser.subscribe(user => {
@@ -41,14 +43,32 @@ export class TicketComponent implements OnInit{
 
   resolved(): void {
     this.ticketState = "resolved"
+    this.ticketService.updateTicket(this.get()).subscribe(response => {
+      console.log("Updated : ", response);
+    });
   }
 
   pending(): void {
     this.ticketState = "pending"
+    this.ticketService.updateTicket(this.get()).subscribe(response => {
+      console.log("Updated : ", response);
+    });
   }
 
   cancelled(): void {
     this.ticketState = "cancelled"
+    this.ticketService.updateTicket(this.get()).subscribe(response => {
+      console.log("Updated : ", response);
+    });
+  }
+
+  private get(){
+    return {
+      id: this.ticketId,
+      title: this.ticketTitle,
+      state: this.ticketState,
+      description: this.ticketDescription,
+    } as Ticket
   }
 
   protected readonly Role = Role;

@@ -15,7 +15,7 @@ export class LandingPageComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.ticketService.getAllTicket().subscribe(tickets => {
+    this.ticketService.tickets$.subscribe(tickets => {
       this.tickets = tickets;
     })
   }
