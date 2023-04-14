@@ -1,4 +1,4 @@
-<div class="card border-dark m-2">
+<div class="card border-dark m-2" style="width:24rem;" >
   <div>
     <h5 class="card-header text-bg-secondary border-dark">
       <div *ngIf="this.userRole?.toString() === 'ADMIN'; else user">
@@ -15,7 +15,7 @@
       </ng-template>
     </h5>
   </div>
-  <div class="card-body">
+  <div class="card-body" >
     <h5 class="card-title">{{ticketTitle}}</h5>
     <p class="card-text">{{ticketDescription}}</p>
     <div *ngIf="this.userRole?.toString() === 'ADMIN'">
@@ -32,7 +32,7 @@
       </div>
       <div class="row" *ngIf="ticketState==='cancelled'">
         <div class="col">
-          <button href="#" (click)="pending()" class="btn btn-warning" value="pending">Mettre en attente</button>
+          <button href="#" (click)="pending()" class="btn btn-warning" value="pending">En attente</button>
         </div>
         <div class="col text-center">
           <button href="#" class="btn btn-secondary" value="modify">Modifier</button>
@@ -49,7 +49,7 @@
           <button href="#" class="btn btn-secondary" value="modify">Modifier</button>
         </div>
         <div class="col text-end">
-          <button href="#" (click)="pending()" class="btn btn-warning" value="pending">Mettre en attente</button>
+          <button href="#" (click)="pending()" class="btn btn-warning" value="pending">En attente</button>
         </div>
       </div>
     </div>

@@ -30,7 +30,6 @@ export class TicketComponent implements OnInit{
   constructor(private userService: UserService, private ticketService: TicketService) { };
 
   ngOnInit(): void {
-    console.log(this.ticketId)
     this.userService.currentUser.subscribe(user => {
       this.userRole = user?.role || Role.USER;
       if (user?.role.toString() === "ADMIN"){
@@ -39,12 +38,10 @@ export class TicketComponent implements OnInit{
         });
       }
     })
-
   }
 
   resolved(): void {
     this.ticketState = "resolved"
-    console.log(this.get())
     this.ticketService.updateTicket(this.get()).subscribe(response => {
       console.log("Updated : ", response);
     });
@@ -52,8 +49,6 @@ export class TicketComponent implements OnInit{
 
   pending(): void {
     this.ticketState = "pending"
-    console.log(this.get())
-
     this.ticketService.updateTicket(this.get()).subscribe(response => {
       console.log("Updated : ", response);
     });
@@ -61,8 +56,6 @@ export class TicketComponent implements OnInit{
 
   cancelled(): void {
     this.ticketState = "cancelled"
-    console.log(this.get())
-
     this.ticketService.updateTicket(this.get()).subscribe(response => {
       console.log("Updated : ", response);
     });

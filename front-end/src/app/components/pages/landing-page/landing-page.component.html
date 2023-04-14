@@ -1,9 +1,13 @@
-<div *ngFor="let ticket of tickets; let i = index">
-  <ticket [ticketId]="ticket.id"
-          [ticketUserId]="ticket.idUser"
-          [ticketDescription]="ticket.description"
-          [ticketState]="ticket.state.toString().toLowerCase()"
-          [ticketTitle]="ticket.title"
-          [userRole]="(userService.currentUser.value)?.role?.toString()"
-          />
+<div class="row">
+  <div class="col-md-3" style="margin-left: 5px; " *ngFor="let ticket of tickets; let i = index" >
+    <ticket [ticketId]="ticket.id"
+             [ticketUserId]="ticket.idUser"
+             [ticketDescription]="ticket.description"
+             [ticketState]="ticket.state.toString().toLowerCase()"
+             [ticketTitle]="ticket.title"
+             [userRole]="(userService.currentUser.value)?.role?.toString()"
+    /><span>&nbsp;</span>
+  </div>
 </div>
+
+<!--class="col-4 col-sm-4 col-md-4 col-lg-4"-->
