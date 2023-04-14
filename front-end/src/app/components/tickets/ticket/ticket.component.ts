@@ -1,15 +1,16 @@
-import { Component, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { UserService } from 'src/app/services/users.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {UserService} from 'src/app/services/users.service';
+import {Role, User} from "../../../models/user";
 
 @Component({
   selector: 'ticket',
   templateUrl: './ticket.component.html',
   styleUrls: ['./ticket.component.css']
 })
-export class TicketComponent {
+export class TicketComponent implements OnInit{
   @Input()
-  ticketId: number = 1;
+  ticketId: number | string = 1;
   @Input()
   ticketTitle: string = "Ceci est le titre de mon ticket";
   @Input()
@@ -19,7 +20,7 @@ export class TicketComponent {
   @Input()
   ticketUserId: string = "1a960343-d0ec-4f47-a12c-9046f8bde423";
   @Input()
-  userRole: string = "admin";
+  userRole: Role | string | undefined = Role.USER;
 
   username: string = "CocoBiturbo";
 
@@ -27,9 +28,15 @@ export class TicketComponent {
   constructor(private userService: UserService) { };
 
   ngOnInit(): void {
-    this.ticketSub = this.userService.getUserById(this.ticketUserId).subscribe((response) => {
-      console.log("response", response)
-    });
+    this.userService.currentUser.subscribe(user => {
+      this.userRole = user?.role || Role.USER;
+      if (user?.role.toString() === "ADMIN"){
+        this.ticketSub = this.userService.getUserById(this.ticketUserId).subscribe((response: User) => {
+          this.username = response.username;
+        });
+      }
+    })
+
   }
 
   resolved(): void {
@@ -43,4 +50,6 @@ export class TicketComponent {
   cancelled(): void {
     this.ticketState = "cancelled"
   }
+
+  protected readonly Role = Role;
 }
