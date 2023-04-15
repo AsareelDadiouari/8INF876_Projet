@@ -32,4 +32,5 @@ export class LandingPageComponent implements OnInit{
       return "unknown";
     }
   }
+
 }

@@ -9,5 +9,5 @@ export type User = {
   lastName?: string
   username: string
   password: string
-  role: Role
+  role: Role | string
 }

@@ -12,7 +12,6 @@ const routes: Routes = [
     path: '',
     component: LandingPageComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
   },
   {
     path: 'auth',
@@ -22,18 +21,25 @@ const routes: Routes = [
   {
     path: 'add-ticket',
     component: AddTicketPageComponent,
+    canActivate: [AuthGuard]
+
   },
   {
     path: 'update-ticket',
     component: UpdateTicketPageComponent,
+    canActivate: [AuthGuard]
+
   },
   {
     path: 'profil',
     component: ProfilPageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'ticket',
     component: TicketComponent,
+    canActivate: [AuthGuard]
+
   },
   {
     path: '**',
