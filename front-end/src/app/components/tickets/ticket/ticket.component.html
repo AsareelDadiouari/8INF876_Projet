@@ -24,7 +24,7 @@
           <button (click)="cancelled()" class="btn btn-danger" value="cancelled">Annuler</button>
         </div>
         <div class="col text-center">
-          <button (click)="navigateToUpdateTicket()" type="button" class="btn btn-secondary" data-bs-toggle="modal"
+          <button (click)="openModal(this.get())" type="button" class="btn btn-secondary" data-bs-toggle="modal"
             data-bs-target="#exampleModal">Modifier</button>
         </div>
         <div class="col text-end">
@@ -36,7 +36,7 @@
           <button (click)="pending()" class="btn btn-warning" value="pending">En attente</button>
         </div>
         <div class="col text-center">
-          <button (click)="navigateToUpdateTicket()" type="button" class="btn btn-secondary" data-bs-toggle="modal"
+          <button (click)="openModal(this.get())" type="button" class="btn btn-secondary" data-bs-toggle="modal"
             data-bs-target="#exampleModal">Modifier</button>
         </div>
         <div class="col text-end">
@@ -48,7 +48,7 @@
           <button (click)="cancelled()" class="btn btn-danger" value="cancelled">Annuler</button>
         </div>
         <div class="col text-center">
-          <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+          <button type="button" (click)="openModal(this.get())" class="btn btn-secondary" data-bs-toggle="modal"
             data-bs-target="#exampleModal">Modifier</button>
         </div>
         <div class="col text-end">

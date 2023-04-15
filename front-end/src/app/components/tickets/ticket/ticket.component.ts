@@ -5,6 +5,8 @@ import { Role, User } from "../../../models/user";
 import { TicketService } from "../../../services/ticket.service";
 import { Ticket } from "../../../models/ticket";
 import { Router } from '@angular/router';
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {UpdateTicketPageComponent} from "../update-tickets/update-tickets.component";
 
 @Component({
   selector: 'ticket',
@@ -28,7 +30,10 @@ export class TicketComponent implements OnInit {
   username: string = "CocoBiturbo";
 
   ticketSub: Subscription = new Subscription();
-  constructor(private userService: UserService, private router: Router, private ticketService: TicketService) { };
+  constructor(private userService: UserService,
+              private router: Router,
+              private ticketService: TicketService,
+              private modalService: NgbModal) { };
 
   ngOnInit(): void {
     this.userService.currentUser.subscribe(user => {
@@ -68,7 +73,12 @@ export class TicketComponent implements OnInit {
     });
   }
 
-  private get() {
+  async openModal(data: Ticket) {
+    const modalRef = this.modalService.open(UpdateTicketPageComponent, { centered: true });
+    modalRef.componentInstance.ticket = data;
+  }
+
+  public get() {
     return {
       id: this.ticketId,
       title: this.ticketTitle,

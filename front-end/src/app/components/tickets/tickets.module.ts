@@ -15,7 +15,7 @@ import { UpdateTicketPageComponent } from "./update-tickets/update-tickets.compo
   ],
   declarations: [
     AddTicketPageComponent,
-    UpdateTicketPageComponent,
+    //UpdateTicketPageComponent,
     TicketComponent
   ],
   exports: [AddTicketPageComponent, TicketComponent],

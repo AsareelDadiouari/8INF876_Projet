@@ -22,6 +22,7 @@ export class TicketService {
         return this.http.post<Ticket>(this.url, credentials).pipe(
             tap((response) => {
                 alert("Ticket created");
+                this.tickets$.next(this.tickets$.value.concat(response));
             }),
           catchError(err => throwError(() => {
             alert("Une erreur s'est produite");
@@ -44,7 +45,9 @@ export class TicketService {
     updateTicket(ticket: Ticket): Observable<Ticket>{
       return this.http.put<Ticket>(this.url + '/' + ticket.id, ticket).pipe(
         tap(response => {
-          this.tickets$.next(this.tickets$.value.map(ticket => this.tickets$.value.find(o => o.id === ticket.id) || ticket))
+          //this.tickets$.next(this.tickets$.value.map(ticket => this.tickets$.value.find(o => o.id === ticket.id) || ticket))
+          const updatedTickets = this.tickets$.value.map((t: Ticket) => t.id === ticket.id ? response : t);
+          this.tickets$.next(updatedTickets);
         })
       );
     }
