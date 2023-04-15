@@ -1,58 +1,61 @@
-<div class="card border-dark m-2" style="width:24rem;">
-  <div>
-    <h5 class="card-header text-bg-secondary border-dark">
-      <div *ngIf="this.userRole?.toString() === 'ADMIN'; else user">
-        Ticket #{{ticketId}} par {{username}}
-        <span class="badge text-bg-danger" *ngIf="ticketState==='cancelled'">Annulé</span>
-        <span class="badge text-bg-warning" *ngIf="ticketState==='pending'">En attente</span>
-        <span class="badge text-bg-success" *ngIf="ticketState==='resolved'">Résolu</span>
-      </div>
-      <ng-template #user>
-        Ticket #{{ticketId}}
-        <span class="badge text-bg-danger" *ngIf="ticketState==='cancelled'">Annulé</span>
-        <span class="badge text-bg-warning" *ngIf="ticketState==='pending'">En attente</span>
-        <span class="badge text-bg-success" *ngIf="ticketState==='resolved'">Résolu</span>
-      </ng-template>
-    </h5>
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">{{ticketTitle}}</h5>
-    <p class="card-text">{{ticketDescription}}</p>
-    <div *ngIf="this.userRole?.toString() === 'ADMIN'">
-      <div class="row" *ngIf="ticketState==='pending'">
-        <div class="col">
-          <button (click)="cancelled()" class="btn btn-danger" value="cancelled">Annuler</button>
+<div *ngIf="this.userRole?.toString() === 'unknown'|| this.userRole?.toString()===null"></div>
+<div *ngIf="this.userRole?.toString() === 'ADMIN'|| this.userRole?.toString()==='USER'">
+  <div class="card border-dark m-2" style="width:24rem;">
+    <div>
+      <h5 class="card-header text-bg-secondary border-dark">
+        <div *ngIf="this.userRole?.toString() === 'ADMIN'; else user">
+          Ticket #{{ticketId}} par {{username}}
+          <span class="badge text-bg-danger" *ngIf="ticketState==='cancelled'">Annulé</span>
+          <span class="badge text-bg-warning" *ngIf="ticketState==='pending'">En attente</span>
+          <span class="badge text-bg-success" *ngIf="ticketState==='resolved'">Résolu</span>
         </div>
-        <div class="col text-center">
-          <button (click)="openModal(this.get())" type="button" class="btn btn-secondary" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">Modifier</button>
+        <ng-template #user>
+          Ticket #{{ticketId}}
+          <span class="badge text-bg-danger" *ngIf="ticketState==='cancelled'">Annulé</span>
+          <span class="badge text-bg-warning" *ngIf="ticketState==='pending'">En attente</span>
+          <span class="badge text-bg-success" *ngIf="ticketState==='resolved'">Résolu</span>
+        </ng-template>
+      </h5>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ticketTitle}}</h5>
+      <p class="card-text">{{ticketDescription}}</p>
+      <div *ngIf="this.userRole?.toString() === 'ADMIN'">
+        <div class="row" *ngIf="ticketState==='pending'">
+          <div class="col">
+            <button (click)="cancelled()" class="btn btn-danger" value="cancelled">Annuler</button>
+          </div>
+          <div class="col text-center">
+            <button (click)="openModal(this.get())" type="button" class="btn btn-secondary" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">Modifier</button>
+          </div>
+          <div class="col text-end">
+            <button (click)="resolved()" class="btn btn-success" value="resolved"> Résoudre</button>
+          </div>
         </div>
-        <div class="col text-end">
-          <button (click)="resolved()" class="btn btn-success" value="resolved"> Résoudre</button>
+        <div class="row" *ngIf="ticketState==='cancelled'">
+          <div class="col">
+            <button (click)="pending()" class="btn btn-warning" value="pending">En attente</button>
+          </div>
+          <div class="col text-center">
+            <button (click)="openModal(this.get())" type="button" class="btn btn-secondary" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">Modifier</button>
+          </div>
+          <div class="col text-end">
+            <button (click)="resolved()" class="btn btn-success" value="resolved">Résoudre</button>
+          </div>
         </div>
-      </div>
-      <div class="row" *ngIf="ticketState==='cancelled'">
-        <div class="col">
-          <button (click)="pending()" class="btn btn-warning" value="pending">En attente</button>
-        </div>
-        <div class="col text-center">
-          <button (click)="openModal(this.get())" type="button" class="btn btn-secondary" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">Modifier</button>
-        </div>
-        <div class="col text-end">
-          <button (click)="resolved()" class="btn btn-success" value="resolved">Résoudre</button>
-        </div>
-      </div>
-      <div class="row" *ngIf="ticketState==='resolved'">
-        <div class="col">
-          <button (click)="cancelled()" class="btn btn-danger" value="cancelled">Annuler</button>
-        </div>
-        <div class="col text-center">
-          <button type="button" (click)="openModal(this.get())" class="btn btn-secondary" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">Modifier</button>
-        </div>
-        <div class="col text-end">
-          <button (click)="pending()" class="btn btn-warning" value="pending">En attente</button>
+        <div class="row" *ngIf="ticketState==='resolved'">
+          <div class="col">
+            <button (click)="cancelled()" class="btn btn-danger" value="cancelled">Annuler</button>
+          </div>
+          <div class="col text-center">
+            <button type="button" (click)="openModal(this.get())" class="btn btn-secondary" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">Modifier</button>
+          </div>
+          <div class="col text-end">
+            <button (click)="pending()" class="btn btn-warning" value="pending">En attente</button>
+          </div>
         </div>
       </div>
     </div>

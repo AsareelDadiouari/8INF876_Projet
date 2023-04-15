@@ -11,6 +11,7 @@ import {UserService} from "../../../services/users.service";
 export class LandingPageComponent implements OnInit{
   tickets: Array<Ticket> = [];
 
+  role: string = ""
   constructor(private ticketService: TicketService, public userService: UserService) {
   }
 
@@ -18,5 +19,17 @@ export class LandingPageComponent implements OnInit{
     this.ticketService.tickets$.asObservable().subscribe(tickets => {
       this.tickets = tickets;
     })
+    this.role = this.getRole()
+    console.log("role :",this.role)
+  }
+
+  getRole(): string {
+    const userString = localStorage.getItem("user");
+    if (userString !== null) {
+      const user = JSON.parse(userString);
+      return user.role;
+    } else {
+      return "unknown";
+    }
   }
 }

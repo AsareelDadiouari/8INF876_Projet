@@ -1,4 +1,7 @@
-<div class="container text-center">
+<div *ngIf="role==='unknown' || role===null">
+  <h1>Veuillez vous connecter pour pouvoir voir vos tickets</h1>
+</div>
+<div class="container text-center" *ngIf="role==='ADMIN' || role==='USER'">
   <div class="row">
     <div class="col-auto" style="margin-left: 5px; " *ngFor="let ticket of tickets; let i = index">
       <ticket [ticketId]="ticket.id" [ticketUserId]="ticket.idUser" [ticketDescription]="ticket.description"

@@ -54,9 +54,7 @@ export class UpdateTicketPageComponent implements OnInit {
     });
   }
 
-  toMainPage($event: MouseEvent) {
-    this.router.navigate([''])
-      .then(r => console.log(r))
-      .catch(err => console.error(err));
+  closeModal($event: MouseEvent) {
+    this.activeModal.close();
   }
 }
