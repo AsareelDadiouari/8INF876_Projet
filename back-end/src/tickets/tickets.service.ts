@@ -1,4 +1,4 @@
-import {Injectable, Logger} from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Ticket } from './tickets.model';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -10,9 +10,9 @@ export class TicketsService {
     private readonly ticketRepository: Repository<Ticket>,
   ) {}
 
-  createTicket(idUser: string, name: string, description: string) {
+  async createTicket(idUser: string, name: string, description: string) {
     const newTicket = new Ticket(idUser, name, description, 'pending');
-    this.ticketRepository.save(newTicket);
+    await this.ticketRepository.save(newTicket);
     return newTicket;
   }
 

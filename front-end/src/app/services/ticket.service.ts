@@ -19,7 +19,6 @@ export class TicketService {
             map(tickets => {
               if (this.userService.currentUser?.value?.role === "USER")
                 tickets = tickets.filter(ticket => ticket.idUser === this.userService.currentUser.value?.id)
-
               return tickets;
             })
           )

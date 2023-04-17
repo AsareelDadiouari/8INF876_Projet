@@ -20,7 +20,6 @@ export class LandingPageComponent implements OnInit{
       this.tickets = tickets;
     })
     this.role = this.getRole()
-    console.log("role :",this.role)
   }
 
   getRole(): string {

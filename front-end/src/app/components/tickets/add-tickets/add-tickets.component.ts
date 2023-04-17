@@ -37,7 +37,6 @@ export class AddTicketPageComponent implements OnInit {
       description: this.ticketForm.get('description')?.value,
       state: this.ticketForm.get('state')?.value,
     } as Ticket;
-    console.log(register)
     this.ticketSub = this.ticketService.createTicket(register).subscribe(response => {
       this.router.navigateByUrl('');
     });
