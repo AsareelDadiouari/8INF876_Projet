@@ -1,0 +1,55 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    env_file: ./.env
+    environment:
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_ROOT_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+
+  backend:
+    container_name: nest-backend
+    restart: unless-stopped
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    ports:
+      - '3000:3000'
+    env_file: ./.env
+    environment:
+      - DB_HOST=db
+      - DB_USER=$MYSQL_USER
+      - DB_PASSWORD=$MYSQL_PASSWORD
+      - DB_NAME=$MYSQL_DATABASE
+      - DB_PORT=$DB_PORT
+
+  frontend:
+      depends_on:
+        - backend
+      container_name: angular-frontend
+      #command:
+       # - ./front-end/node_modules/.bin/ng build
+
+      build:
+        context: ./front-end
+        dockerfile: Dockerfile
+      ports:
+        - '8888:81'
+      volumes:
+        - './Dockerfile:/usr/src/app'
+
+volumes:
+  my-db:

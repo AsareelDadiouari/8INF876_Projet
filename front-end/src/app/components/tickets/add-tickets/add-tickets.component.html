@@ -1,0 +1,36 @@
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <form [formGroup]="ticketForm" class="col-auto p-2">
+                <div class="container text-center fs-3 mb-3">Formulaire d'ajout de ticket</div>
+                <div>
+                    <label for="inputTitle" class="fs-4 form-label">Titre du ticket</label>
+                    <div class="form-floating">
+                        <input [formControlName]="'title'" type="text" class="form-control" id="floatingInput"
+                            placeholder="Titre">
+                        <label for="floatingInput">Titre</label>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <label for="inputTitle" class="fs-4 form-label">Description</label>
+                    <div class="form-floating">
+                        <textarea [formControlName]="'description'" class="form-control" aria-label="With textarea"
+                            placeholder="Description"></textarea>
+                        <label for="floatingTextarea2">Description</label>
+                    </div>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col-6 text-start mt-2">
+                            <button (click)="toMainPage($event)" class="btn btn-danger">Annuler</button>
+                        </div>
+                        <div class="col-6 text-end mt-2">
+                            <button (click)="onSubmit($event)" type="submit" class="btn btn-success">Ajouter le
+                                ticket</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

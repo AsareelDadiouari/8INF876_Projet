@@ -1,0 +1,63 @@
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <form [formGroup]="profilForm" class="col-auto p-2">
+                <div class="container text-center fs-3 mb-3">Profil</div>
+                <div class="row">
+                    <label for="FormControlUsername" class="fs-4 form-label">Nom d'utilisateur</label>
+                    <div class="col">
+                        <input type="text" class="form-control" id="FormControlUsername" value={{username}} readonly>
+                    </div>
+                    <div class="col-auto">
+                        <button (click)="updateUsername()" type="submit" class="btn btn-secondary">Modifier</button>
+                    </div>
+                </div>
+                <div *ngIf="updateUsernameValue">
+                    <div class="row justify-content-center">
+                        <div class="col mt-2">
+                            <input [formControlName]="'newUsername'" type="text" class="form-control"
+                                id="FormControlUsername" placeholder="Nouveau pseudo">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <input [formControlName]="'passwordForNewUsername'" type="password" class="form-control"
+                                id="FormControlActualPasswordUsername" placeholder="Mot de passe">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <label for="FormControlPassword" class="fs-4 form-label">Mot de passe</label>
+                    <div class="col">
+                        <input type="password" class="form-control" id="FormControlPassword" value={{password}}
+                            readonly>
+                    </div>
+                    <div class="col-auto">
+                        <button (click)="updatePassword()" type="submit" class="btn btn-secondary">Modifier</button>
+                    </div>
+                </div>
+                <div *ngIf="updatePasswordValue">
+                    <div class="row justify-content-center">
+                        <div class="col-6 mt-2">
+                            <input [formControlName]="'newPassord'" type="password" class="form-control"
+                                id="FormControlNewPassword" placeholder="Nouveau Mot de passe">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <input [formControlName]="'passwordForNewPassord'" type="password" class="form-control"
+                                id="FormControlActualPassword" placeholder="Mot de passe">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col-4 text-start mt-3">
+                            <button (click)="toMainPage($event)" class="btn btn-danger">Annuler</button>
+                        </div>
+                        <div class="col-8 text-end mt-3">
+                            <button (click)="onSubmit($event)" type="submit" class="btn btn-success">Sauvegarder les
+                                modifications</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
